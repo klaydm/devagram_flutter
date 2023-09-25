@@ -7,11 +7,13 @@ class CustomTextField extends StatelessWidget {
     required this.textHint,
     required this.iconPath,
     this.obscureText = false,
+    this.textController,
   }): super (key: key);
 
   final textHint;
   final String iconPath;
   final obscureText;
+  final textController;
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +31,13 @@ class CustomTextField extends StatelessWidget {
           border: Border(bottom: BorderSide(width: 1, color: primaryColor))
         ),
         child: TextField(
-         obscureText: obscureText,
-         style: const TextStyle(color: primaryColor),
-        decoration: InputDecoration(
-          icon: ImageIcon(AssetImage(iconPath), color: primaryColor,),
-          hintText: textHint,
-          border: InputBorder.none
+          controller: textController,
+          obscureText: obscureText,
+          style: const TextStyle(color: primaryColor),
+          decoration: InputDecoration(
+            icon: ImageIcon(AssetImage(iconPath), color: primaryColor,),
+            hintText: textHint,
+            border: InputBorder.none
         ),
         ),
       ),

@@ -1,25 +1,29 @@
+import 'package:devagram_flutter/View/HomeView.dart';
 import 'package:devagram_flutter/View/LoginView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:localstorage/localstorage.dart';
 
 void main() async {
   await dotenv.load(fileName : ".env");
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final LocalStorage storage = LocalStorage('main');
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Devagram',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: LoginView(),
+      home: storage.getItem("USUARIO_LOGADO") ? HomeView() : LoginView(),
     );
   }
 }
