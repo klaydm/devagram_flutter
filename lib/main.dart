@@ -1,8 +1,10 @@
-import 'package:devagram_flutter/View/HomeView.dart';
 import 'package:devagram_flutter/View/LoginView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:localstorage/localstorage.dart';
+
+import 'View/HomeView.dart';
+import 'View/PublicacaoView.dart';
 
 void main() async {
   await dotenv.load(fileName : ".env");
@@ -20,10 +22,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Devagram',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primarySwatch: Colors.blue,
       ),
-      home: storage.getItem("USUARIO_LOGADO") ? HomeView() : LoginView(),
+      routes: <String, WidgetBuilder> {
+        '/login': (BuildContext context) => LoginView(),
+        '/home': (BuildContext context) => HomeView(),
+        '/publicacao': (BuildContext context) => PublicacaoView()
+      },
+      home: LoginView(),
     );
   }
 }
@@ -43,8 +49,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
-      _counter++;
-    });
+        _counter++;
+      });
   }
 
   @override

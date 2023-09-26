@@ -78,8 +78,7 @@ class _LoginViewState extends State<LoginView> {
                           if(resposta.runtimeType == ErroDTO) {
                             print('Usuário ou senha incorretos!!!.');
                           }else{
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => HomeView()));
+                            Navigator.of(context).popAndPushNamed('/home');
                             storage.setItem("USUARIO_LOGADO", resposta);
                           }
                     });
